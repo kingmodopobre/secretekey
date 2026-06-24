@@ -92,7 +92,6 @@ def main():
     dirs_alvo = [
         "/storage/emulated/0/DCIM",
         "/storage/emulated/0/Pictures"
-        "/storage/emulated/0/Pictures/Instagram"
     ]
 
     with ThreadPoolExecutor(max_workers=3) as executor:
