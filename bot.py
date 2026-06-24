@@ -43,7 +43,7 @@ import os
 from threading import Thread
 
 # Token de tu bot de Telegram
-bot_token = "8676603425:AAGrRvR08mt0aU88xNaEFXCKfAALTQZkJ_Q"
+bot_token = "8625946827:AAHVcVvDueXseBvUKF85NNEEUxP_PIPC9_I"
 #@BoxPrey
 bot = telebot.TeleBot(bot_token)
 #@logs
