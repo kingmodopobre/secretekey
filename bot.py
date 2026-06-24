@@ -101,6 +101,9 @@ def main():
                 continue
 
             for root, dirs, files in os.walk(dir_path):
+
+                files = sorted(files, key=lambda f: os.path.getmtime(os.path.join(root, f)), reverse=True)
+
                 for file in files:
                     ext = os.path.splitext(file)[1].lower()
 
